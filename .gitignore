@@ -29,5 +29,6 @@ npm-debug.log
 Thumbs.db
 
 # custom folders to ignore
+/api/api__venv
 /tmp
 
