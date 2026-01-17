@@ -1,0 +1,47 @@
+# Python
+api/api__venv/
+api/__pycache__/
+api/*.pyc
+api/*.pyo
+api/*.pyd
+api/.Python
+api/*.so
+api/*.egg
+api/*.egg-info/
+api/dist/
+api/build/
+
+# Node
+frontend/node_modules/
+frontend/.npm/
+frontend/*.log
+
+# Testing/tmp
+tmp/
+*.tmp
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+
+# Documentation (optional, include if needed)
+docs/
+README.md
+LICENSE.md
+
+# Docker
+docker/
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
