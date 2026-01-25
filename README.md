@@ -1,6 +1,9 @@
 # OWASP LLM Security Demo
 
+[![Docker Build](https://github.com/FrancescoPaoloL/llmSecurityDemo/actions/workflows/docker-build.yml/badge.svg)](https://github.com/FrancescoPaoloL/llmSecurityDemo/actions)
+
 A demo tool for detecting LLM vulnerabilities based on the OWASP Top 10 for LLMs.
+
 
 ## What it does
 
