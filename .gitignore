@@ -1,5 +1,5 @@
 # Build artifacts
-build/
+/build/
 cmake-build-*/
 *.o
 *.a
@@ -34,11 +34,17 @@ infra/azure/*.tfstate
 infra/azure/*.tfstate.backup
 infra/azure/.terraform.lock.hcl
 
-
 # custom folders to ignore
 /api/api__venv
-/llama.cpp/
 /tmp
 notes.txt
-
 tests/results/
+
+# llama.cpp - ignore source but keep binaries
+llama.cpp/build-*/
+llama.cpp/models/*.gguf
+llama.cpp/.git/
+llama.cpp/examples/
+llama.cpp/common/
+llama.cpp/src/
+
