@@ -41,3 +41,4 @@ infra/azure/.terraform.lock.hcl
 /tmp
 notes.txt
 
+tests/results/
