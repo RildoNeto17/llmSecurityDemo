@@ -9,17 +9,27 @@ class LlamaService:
         self.server_url = server_url or "http://localhost:8081"
         self.detection_binary = Config.BINARY_PATH
 
+    def _format_qwen_prompt(self, prompt: str) -> str:
+        # Format prompt for Qwen instruction model
+        system_msg = "You are a helpful AI assistant. Answer questions directly, accurately, and concisely."
+        return f"<|im_start|>system\n{system_msg}<|im_end|>\n<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n"
+
     def generate_response(self, prompt: str, max_tokens: int = 50) -> Dict[str, Any]:
         # Generate LLM response via llama-server
         # Returns: Dict with response content and metadata
         try:
+            formatted_prompt = self._format_qwen_prompt(prompt)
+
             response = requests.post(
                 f"{self.server_url}/completion",
                 json={
-                    "prompt": prompt,
+                    "prompt": formatted_prompt,
                     "n_predict": max_tokens,
                     "temperature": 0.7,
-                    "stop": ["</s>", "\n\n"]
+                    "top_p": 0.9,
+                    "top_k": 40,
+                    "repeat_penalty": 1.1,
+                    "stop": ["<|im_end|>", "</s>", "\n\nUser:", "\n\nAssistant:"]
                 },
                 timeout=120
             )
@@ -27,13 +37,12 @@ class LlamaService:
             data = response.json()
 
             return {
-                "content": data.get("content", ""),
+                "content": data.get("content", "").strip(),
                 "tokens_prompt": data.get("tokens_evaluated", 0),
                 "tokens_generated": data.get("tokens_predicted", 0),
                 "generation_time": data.get("timings", {}).get("predicted_ms", 0) / 1000.0,
                 "stop_reason": data.get("stop_type", "unknown")
             }
-
         except requests.exceptions.RequestException as e:
             raise RuntimeError(f"llama-server error: {str(e)}")
 
@@ -66,7 +75,6 @@ class LlamaService:
 
     def process_prompt(self, prompt: str, max_tokens: int = 50) -> Dict[str, Any]:
         # make a full pipeline
-
         # 1. Generate response (fast via server)
         llm_result = self.generate_response(prompt, max_tokens)
 
