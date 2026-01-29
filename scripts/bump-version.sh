@@ -1,22 +1,48 @@
 #!/bin/bash
 # scripts/bump-version.sh
-# Usage: ./scripts/bump-version.sh [major|minor|patch]
-#       Patch (bug fixes)
-#       Minor (new features)
-#       Major (breaking changes / 1.0.0)
+# Usage: ./scripts/bump-version.sh <component> <type>
+# component: api | frontend
+# type: major | minor | patch
 
 set -e
 
-TYPE=${1:-patch}
-
-# Validate argument
-if [[ ! "$TYPE" =~ ^(major|minor|patch)$ ]]; then
-    echo "Usage: $0 [major|minor|patch]"
+# Validate arguments
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <component> <type>"
+    echo "  component: api | frontend"
+    echo "  type: major | minor | patch"
+    echo ""
+    echo "Examples:"
+    echo "  $0 api patch"
+    echo "  $0 frontend minor"
     exit 1
 fi
 
-# Read current version
-CURRENT=$(grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' api/__version__.py)
+COMPONENT=$1
+TYPE=$2
+
+# Validate component
+if [[ ! "$COMPONENT" =~ ^(api|frontend)$ ]]; then
+    echo "Error: component must be 'api' or 'frontend'"
+    exit 1
+fi
+
+# Validate type
+if [[ ! "$TYPE" =~ ^(major|minor|patch)$ ]]; then
+    echo "Error: type must be 'major', 'minor', or 'patch'"
+    exit 1
+fi
+
+# Get current version based on component
+if [ "$COMPONENT" = "api" ]; then
+    CURRENT=$(grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' api/__version__.py)
+    VERSION_FILE="api/__version__.py"
+else
+    CURRENT=$(grep -o '"version": "[^"]*"' frontend/package.json | cut -d'"' -f4)
+    VERSION_FILE="frontend/package.json"
+fi
+
+# Parse version
 IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
 
 # Calculate new version
@@ -32,19 +58,41 @@ case $TYPE in
         ;;
 esac
 
-echo "Bumping version: $CURRENT → $NEW ($TYPE)"
+# Show changes and ask for confirmation
+echo ""
+echo "Component: $COMPONENT"
+echo "Current version: $CURRENT"
+echo "New version: $NEW ($TYPE bump)"
+echo ""
+read -p "Proceed with version bump? (y/n) " -n 1 -r
+echo ""
 
-# Update files
-echo "__version__ = \"$NEW\"" > api/__version__.py
-sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$NEW\"/" frontend/package.json
-sed -i "s/frontendVersion: '[^']*'/frontendVersion: '$NEW'/" frontend/views/index.ejs
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "❌ Version bump cancelled"
+    exit 0
+fi
 
-# Git operations
-git add api/__version__.py frontend/package.json frontend/views/index.ejs
-git commit -m "chore: bump version to $NEW"
-git tag "v$NEW"
+echo "Updating files..."
+
+# Update files based on component
+if [ "$COMPONENT" = "api" ]; then
+    echo "__version__ = \"$NEW\"" > api/__version__.py
+    git add api/__version__.py
+    git commit -m "chore(api): bump version to $NEW"
+    git tag "api-v$NEW"
+else
+    sed -i "s/\"version\": \"[^\"]*\"/\"version\": \"$NEW\"/" frontend/package.json
+    sed -i "s/frontendVersion: '[^']*'/frontendVersion: '$NEW'/" frontend/views/index.ejs
+    git add frontend/package.json frontend/views/index.ejs
+    git commit -m "chore(frontend): bump version to $NEW"
+    git tag "frontend-v$NEW"
+fi
 
 echo ""
-echo "Version bumped to $NEW"
-echo "Don't forget: git push && git push --tags"
+echo "$COMPONENT version bumped to $NEW"
+echo "Git tag created: ${COMPONENT}-v$NEW"
+echo ""
+echo "Next steps:"
+echo "  git push"
+echo "  git push --tags"
 
